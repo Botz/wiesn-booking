@@ -12,7 +12,10 @@ const navItems = [
 <template>
   <aside class="w-56 shrink-0 bg-gray-50 dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col min-h-screen">
     <div class="p-4 border-b border-gray-200 dark:border-gray-800">
-      <NuxtLink to="/admin" class="flex items-center gap-2">
+      <NuxtLink
+        to="/admin"
+        class="flex items-center gap-2"
+      >
         <span class="text-2xl">🍺</span>
         <div>
           <p class="font-bold text-sm leading-tight">Wiesn Booking</p>
@@ -30,7 +33,10 @@ const navItems = [
         active-class="bg-primary-100 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 font-medium"
         :exact="item.exact"
       >
-        <UIcon :name="item.icon" class="w-4 h-4 shrink-0" />
+        <UIcon
+          :name="item.icon"
+          class="w-4 h-4 shrink-0"
+        />
         {{ item.label }}
       </NuxtLink>
     </nav>

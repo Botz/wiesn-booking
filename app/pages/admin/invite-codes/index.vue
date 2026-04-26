@@ -17,7 +17,9 @@ function joinUrl(code: string) {
 async function copyJoinUrl(id: string, code: string) {
   await navigator.clipboard.writeText(joinUrl(code))
   copiedId.value = id
-  setTimeout(() => { copiedId.value = null }, 2000)
+  setTimeout(() => {
+    copiedId.value = null
+  }, 2000)
 }
 
 async function deleteCode(id: string, code: string) {
@@ -29,19 +31,38 @@ async function deleteCode(id: string, code: string) {
 <template>
   <div>
     <div class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-bold">Invite Codes</h1>
-      <UButton to="/admin/invite-codes/new" icon="i-lucide-plus">Neu</UButton>
+      <h1 class="text-2xl font-bold">
+        Invite Codes
+      </h1>
+      <UButton
+        to="/admin/invite-codes/new"
+        icon="i-lucide-plus"
+      >
+        Neu
+      </UButton>
     </div>
 
-    <div v-if="loading" class="flex justify-center py-12">
-      <UIcon name="i-lucide-loader-circle" class="w-8 h-8 animate-spin text-muted" />
+    <div
+      v-if="loading"
+      class="flex justify-center py-12"
+    >
+      <UIcon
+        name="i-lucide-loader-circle"
+        class="w-8 h-8 animate-spin text-muted"
+      />
     </div>
 
-    <div v-else-if="inviteCodes.length === 0" class="text-center py-12 text-muted">
+    <div
+      v-else-if="inviteCodes.length === 0"
+      class="text-center py-12 text-muted"
+    >
       Noch keine Invite Codes vorhanden.
     </div>
 
-    <div v-else class="space-y-3">
+    <div
+      v-else
+      class="space-y-3"
+    >
       <div
         v-for="c in inviteCodes"
         :key="c.id"
@@ -51,12 +72,29 @@ async function deleteCode(id: string, code: string) {
           <div class="min-w-0">
             <div class="flex items-center gap-2 mb-1">
               <span class="font-mono font-bold text-lg">{{ c.code }}</span>
-              <UBadge v-if="!c.is_active" color="neutral" variant="soft" size="xs">Inaktiv</UBadge>
-              <UBadge v-if="c.max_guests_per_booking > 1" color="info" variant="soft" size="xs">
+              <UBadge
+                v-if="!c.is_active"
+                color="neutral"
+                variant="soft"
+                size="xs"
+              >
+                Inaktiv
+              </UBadge>
+              <UBadge
+                v-if="c.max_guests_per_booking > 1"
+                color="info"
+                variant="soft"
+                size="xs"
+              >
                 +1 erlaubt
               </UBadge>
             </div>
-            <p v-if="c.label" class="text-sm text-muted">{{ c.label }}</p>
+            <p
+              v-if="c.label"
+              class="text-sm text-muted"
+            >
+              {{ c.label }}
+            </p>
             <div class="flex flex-wrap gap-1 mt-2">
               <UBadge
                 v-for="r in c.invite_code_reservations"
@@ -89,7 +127,7 @@ async function deleteCode(id: string, code: string) {
               variant="ghost"
               :icon="c.is_active ? 'i-lucide-toggle-right' : 'i-lucide-toggle-left'"
               :color="c.is_active ? 'success' : 'neutral'"
-              @click="toggleActive(c.id, c.is_active)"
+              @click="toggleActive(c.id, !!c.is_active)"
             />
             <UButton
               size="sm"

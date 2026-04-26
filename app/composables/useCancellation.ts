@@ -21,12 +21,11 @@ export const useCancellation = (token: string) => {
       booking.value = data
       success.value = true
       return data
-    }
-    catch (e: any) {
-      error.value = e.data?.statusMessage ?? e.data?.message ?? 'Stornierung fehlgeschlagen'
+    } catch (e: unknown) {
+      const err = e as { data?: { statusMessage?: string, message?: string } }
+      error.value = err.data?.statusMessage ?? err.data?.message ?? 'Stornierung fehlgeschlagen'
       return null
-    }
-    finally {
+    } finally {
       loading.value = false
     }
   }

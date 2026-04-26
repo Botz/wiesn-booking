@@ -14,26 +14,47 @@ async function deleteReservation(id: string, name: string) {
 <template>
   <div>
     <div class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-bold">Reservierungen</h1>
-      <UButton to="/admin/reservations/new" icon="i-lucide-plus">Neu</UButton>
+      <h1 class="text-2xl font-bold">
+        Reservierungen
+      </h1>
+      <UButton
+        to="/admin/reservations/new"
+        icon="i-lucide-plus"
+      >
+        Neu
+      </UButton>
     </div>
 
-    <div v-if="loading" class="flex justify-center py-12">
-      <UIcon name="i-lucide-loader-circle" class="w-8 h-8 animate-spin text-muted" />
+    <div
+      v-if="loading"
+      class="flex justify-center py-12"
+    >
+      <UIcon
+        name="i-lucide-loader-circle"
+        class="w-8 h-8 animate-spin text-muted"
+      />
     </div>
 
-    <div v-else-if="reservations.length === 0" class="text-center py-12 text-muted">
+    <div
+      v-else-if="reservations.length === 0"
+      class="text-center py-12 text-muted"
+    >
       Keine Reservierungen vorhanden.
     </div>
 
-    <div v-else class="space-y-2">
+    <div
+      v-else
+      class="space-y-2"
+    >
       <div
         v-for="r in reservations"
         :key="r.id"
         class="flex items-center justify-between p-4 border rounded-xl bg-white dark:bg-gray-900"
       >
         <div class="min-w-0">
-          <p class="font-medium">{{ r.name }}</p>
+          <p class="font-medium">
+            {{ r.name }}
+          </p>
           <p class="text-sm text-muted">
             {{ new Date(r.date).toLocaleDateString('de-DE') }}
             · {{ r.total_seats }} Plätze
@@ -41,8 +62,18 @@ async function deleteReservation(id: string, name: string) {
           </p>
         </div>
         <div class="flex gap-1 shrink-0 ml-4">
-          <UButton :to="`/admin/reservations/${r.id}`" size="sm" variant="ghost" icon="i-lucide-eye" />
-          <UButton :to="`/admin/reservations/${r.id}/edit`" size="sm" variant="ghost" icon="i-lucide-pencil" />
+          <UButton
+            :to="`/admin/reservations/${r.id}`"
+            size="sm"
+            variant="ghost"
+            icon="i-lucide-eye"
+          />
+          <UButton
+            :to="`/admin/reservations/${r.id}/edit`"
+            size="sm"
+            variant="ghost"
+            icon="i-lucide-pencil"
+          />
           <UButton
             size="sm"
             variant="ghost"

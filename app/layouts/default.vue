@@ -2,7 +2,10 @@
   <UApp>
     <UHeader>
       <template #left>
-        <NuxtLink to="/" class="font-bold text-xl flex items-center gap-2">
+        <NuxtLink
+          to="/"
+          class="font-bold text-xl flex items-center gap-2"
+        >
           <span>🍺</span>
           <span>Wiesn Booking</span>
         </NuxtLink>

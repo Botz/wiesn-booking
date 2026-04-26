@@ -28,12 +28,11 @@ export const useBooking = () => {
       })
       results.value = data
       return data
-    }
-    catch (e: any) {
-      error.value = e.data?.statusMessage ?? e.data?.message ?? 'Buchung fehlgeschlagen'
+    } catch (e: unknown) {
+      const err = e as { data?: { statusMessage?: string, message?: string } }
+      error.value = err.data?.statusMessage ?? err.data?.message ?? 'Buchung fehlgeschlagen'
       return null
-    }
-    finally {
+    } finally {
       loading.value = false
     }
   }

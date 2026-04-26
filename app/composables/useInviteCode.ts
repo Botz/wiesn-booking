@@ -28,11 +28,10 @@ export const useInviteCode = (code: string) => {
     try {
       const result = await $fetch<InviteCodeData>(`/api/invite-codes/${encodeURIComponent(code)}`)
       data.value = result
-    }
-    catch (e: any) {
-      error.value = e.data?.statusMessage ?? e.data?.message ?? 'Ungültiger Einladungscode'
-    }
-    finally {
+    } catch (e: unknown) {
+      const err = e as { data?: { statusMessage?: string, message?: string } }
+      error.value = err.data?.statusMessage ?? err.data?.message ?? 'Ungültiger Einladungscode'
+    } finally {
       loading.value = false
     }
   }

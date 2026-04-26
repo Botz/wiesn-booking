@@ -21,8 +21,7 @@ function toggleReservation(id: string) {
   const idx = form.selectedReservationIds.indexOf(id)
   if (idx === -1) {
     form.selectedReservationIds.push(id)
-  }
-  else {
+  } else {
     form.selectedReservationIds.splice(idx, 1)
   }
 }
@@ -44,8 +43,7 @@ async function onSubmit() {
 
   if (createError) {
     error.value = createError.message
-  }
-  else {
+  } else {
     router.push('/admin/invite-codes')
   }
   loading.value = false
@@ -55,8 +53,15 @@ async function onSubmit() {
 <template>
   <div class="max-w-lg">
     <div class="flex items-center gap-3 mb-6">
-      <UButton to="/admin/invite-codes" variant="ghost" icon="i-lucide-arrow-left" size="sm" />
-      <h1 class="text-2xl font-bold">Neuer Invite Code</h1>
+      <UButton
+        to="/admin/invite-codes"
+        variant="ghost"
+        icon="i-lucide-arrow-left"
+        size="sm"
+      />
+      <h1 class="text-2xl font-bold">
+        Neuer Invite Code
+      </h1>
     </div>
 
     <div class="space-y-4">
@@ -68,12 +73,17 @@ async function onSubmit() {
           autocapitalize="characters"
           class="font-mono"
         />
-        <p class="text-xs text-muted mt-1">Wird automatisch in Großbuchstaben umgewandelt</p>
+        <p class="text-xs text-muted mt-1">
+          Wird automatisch in Großbuchstaben umgewandelt
+        </p>
       </div>
 
       <div>
         <label class="block text-sm font-medium mb-1.5">Beschreibung (intern)</label>
-        <UInput v-model="form.label" placeholder="z.B. Freunde & Familie" />
+        <UInput
+          v-model="form.label"
+          placeholder="z.B. Freunde & Familie"
+        />
       </div>
 
       <div>
@@ -97,10 +107,19 @@ async function onSubmit() {
       <!-- Reservations -->
       <div>
         <label class="block text-sm font-medium mb-2">Verknüpfte Reservierungen</label>
-        <div v-if="reservations.length === 0" class="text-sm text-muted">
-          Keine Reservierungen vorhanden. <NuxtLink to="/admin/reservations/new" class="underline">Jetzt erstellen</NuxtLink>
+        <div
+          v-if="reservations.length === 0"
+          class="text-sm text-muted"
+        >
+          Keine Reservierungen vorhanden. <NuxtLink
+            to="/admin/reservations/new"
+            class="underline"
+          >Jetzt erstellen</NuxtLink>
         </div>
-        <div v-else class="space-y-2">
+        <div
+          v-else
+          class="space-y-2"
+        >
           <div
             v-for="r in reservations"
             :key="r.id"
@@ -114,18 +133,36 @@ async function onSubmit() {
               :class="form.selectedReservationIds.includes(r.id) ? 'text-primary-500' : 'text-muted'"
             />
             <div>
-              <p class="text-sm font-medium">{{ r.name }}</p>
-              <p class="text-xs text-muted">{{ new Date(r.date).toLocaleDateString('de-DE') }}</p>
+              <p class="text-sm font-medium">
+                {{ r.name }}
+              </p>
+              <p class="text-xs text-muted">
+                {{ new Date(r.date).toLocaleDateString('de-DE') }}
+              </p>
             </div>
           </div>
         </div>
       </div>
 
-      <UAlert v-if="error" color="error" :description="error" />
+      <UAlert
+        v-if="error"
+        color="error"
+        :description="error"
+      />
 
       <div class="flex gap-3 pt-2">
-        <UButton to="/admin/invite-codes" color="neutral" variant="ghost">Abbrechen</UButton>
-        <UButton :loading="loading" :disabled="!form.code.trim()" @click="onSubmit">
+        <UButton
+          to="/admin/invite-codes"
+          color="neutral"
+          variant="ghost"
+        >
+          Abbrechen
+        </UButton>
+        <UButton
+          :loading="loading"
+          :disabled="!form.code.trim()"
+          @click="onSubmit"
+        >
           Erstellen
         </UButton>
       </div>

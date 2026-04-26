@@ -15,7 +15,9 @@ const cancelUrl = computed(() => {
 async function copy() {
   await navigator.clipboard.writeText(cancelUrl.value)
   copied.value = true
-  setTimeout(() => { copied.value = false }, 2000)
+  setTimeout(() => {
+    copied.value = false
+  }, 2000)
 }
 </script>
 

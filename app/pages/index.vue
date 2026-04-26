@@ -20,8 +20,12 @@ function pad(n: number) {
 <template>
   <div class="min-h-[calc(100vh-10rem)] flex items-center justify-center px-4">
     <div class="max-w-md w-full text-center">
-      <div class="text-7xl mb-6">🍺</div>
-      <h1 class="text-4xl font-bold mb-3">Wiesn Booking</h1>
+      <div class="text-7xl mb-6">
+        🍺
+      </div>
+      <h1 class="text-4xl font-bold mb-3">
+        Wiesn Booking
+      </h1>
 
       <!-- Countdown -->
       <template v-if="!isOpen">
@@ -30,7 +34,11 @@ function pad(n: number) {
         </p>
 
         <div class="flex justify-center gap-4 mb-8">
-          <div v-for="(value, label) in { Tage: remaining.days, Std: remaining.hours, Min: remaining.minutes, Sek: remaining.seconds }" :key="label" class="flex flex-col items-center">
+          <div
+            v-for="(value, label) in { Tage: remaining.days, Std: remaining.hours, Min: remaining.minutes, Sek: remaining.seconds }"
+            :key="label"
+            class="flex flex-col items-center"
+          >
             <span class="text-4xl font-mono font-bold tabular-nums">{{ pad(value) }}</span>
             <span class="text-xs text-muted uppercase tracking-wide mt-1">{{ label }}</span>
           </div>

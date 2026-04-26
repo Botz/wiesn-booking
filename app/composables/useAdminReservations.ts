@@ -1,6 +1,17 @@
+interface AdminReservation {
+  id: string
+  name: string
+  date: string
+  tent: string | null
+  total_seats: number
+  total_cost: number | null
+  whatsapp_link: string | null
+  notes: string | null
+}
+
 export const useAdminReservations = () => {
   const supabase = useSupabaseClient()
-  const reservations = ref<any[]>([])
+  const reservations = ref<AdminReservation[]>([])
   const loading = ref(false)
 
   async function fetchAll() {
