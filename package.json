@@ -1,0 +1,39 @@
+{
+  "name": "wiesn-booking",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "typecheck": "nuxt typecheck",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest --coverage",
+    "test:unit": "vitest --project unit",
+    "test:nuxt": "vitest --project nuxt"
+  },
+  "dependencies": {
+    "@iconify-json/lucide": "^1.2.100",
+    "@iconify-json/simple-icons": "^1.2.75",
+    "@nuxt/hints": "1.0.3",
+    "@nuxt/test-utils": "4.0.0",
+    "@nuxt/ui": "^4.6.0",
+    "@nuxtjs/supabase": "2.0.4",
+    "nuxt": "^4.4.2",
+    "nuxt-icons": "4.0.0",
+    "tailwindcss": "^4.2.2"
+  },
+  "devDependencies": {
+    "@nuxt/eslint": "^1.15.2",
+    "@vitest/coverage-v8": "^4.1.2",
+    "@vue/test-utils": "^2.4.6",
+    "eslint": "^10.1.0",
+    "typescript": "^6.0.2",
+    "vitest": "^4.1.2",
+    "vue-tsc": "^3.2.6"
+  },
+  "packageManager": "pnpm@10.33.0"
+}
