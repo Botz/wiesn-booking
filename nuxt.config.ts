@@ -6,7 +6,9 @@ export default defineNuxtConfig({
     '@nuxt/hints',
     '@nuxt/test-utils',
     'nuxt-icons',
-    '@nuxtjs/supabase'
+    '@nuxtjs/supabase',
+    '@vercel/analytics/nuxt',
+    '@vercel/speed-insights/nuxt'
   ],
 
   devtools: {
