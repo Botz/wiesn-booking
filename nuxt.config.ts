@@ -13,6 +13,10 @@ export default defineNuxtConfig({
     enabled: true
   },
 
+  devServer: {
+    https: true
+  },
+
   css: ['~/assets/css/main.css'],
 
   supabase: {
@@ -24,8 +28,7 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    '/': { prerender: false },
-    '/admin/**': { ssr: false }
+    '/': { prerender: false }
   },
 
   compatibilityDate: '2025-01-15',

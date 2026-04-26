@@ -1,4 +1,11 @@
+// Booking opens 2026-05-01 at 08:00 Munich time (CEST = UTC+2)
+const GATE_DATE = new Date('2026-05-01T06:00:00Z')
+
 export default defineEventHandler(async (event) => {
+  if (new Date() < GATE_DATE) {
+    throw createError({ statusCode: 403, statusMessage: 'Buchungen sind noch nicht möglich' })
+  }
+
   const body = await readBody(event)
   const { inviteCode, reservationIds, guestName, guestContact, plusOneName, seatCount } = body
 

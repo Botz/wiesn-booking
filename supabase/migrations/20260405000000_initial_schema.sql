@@ -1,5 +1,5 @@
 -- Enable pgcrypto for gen_random_bytes
-CREATE EXTENSION IF NOT EXISTS pgcrypto;
+CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA extensions;
 
 -- reservations
 CREATE TABLE reservations (
@@ -43,7 +43,7 @@ CREATE TABLE bookings (
   seat_count          int NOT NULL DEFAULT 1,
   status              text NOT NULL DEFAULT 'confirmed'
                         CHECK (status IN ('confirmed', 'waitlisted', 'cancelled')),
-  cancellation_token  text UNIQUE NOT NULL DEFAULT encode(gen_random_bytes(32), 'hex'),
+  cancellation_token  text UNIQUE NOT NULL DEFAULT encode(extensions.gen_random_bytes(32), 'hex'),
   payment_status      text NOT NULL DEFAULT 'pending'
                         CHECK (payment_status IN ('pending', 'paid')),
   payment_note        text,
