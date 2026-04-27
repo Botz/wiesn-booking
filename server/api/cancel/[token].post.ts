@@ -30,7 +30,7 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 500, statusMessage: 'Stornierung fehlgeschlagen' })
   }
 
-  const reservation = booking.reservations as any
+  const reservation = booking.reservations as { name?: string, date?: string } | null
   return {
     success: true,
     guestName: booking.guest_name,

@@ -1,4 +1,11 @@
+// Booking opens 2026-05-01 at 08:00 Munich time (CEST = UTC+2)
+const GATE_DATE = new Date('2026-05-01T06:00:00Z')
+
 export default defineEventHandler(async (event) => {
+  if (new Date() < GATE_DATE) {
+    throw createError({ statusCode: 403, statusMessage: 'Buchungen sind noch nicht möglich' })
+  }
+
   const body = await readBody(event)
   const { inviteCode, reservationIds, guestName, guestContact, plusOneName, seatCount } = body
 
@@ -27,7 +34,7 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, statusMessage: 'Der Code erlaubt keine Begleitung' })
   }
 
-  const allowedIds: string[] = codeData.invite_code_reservations.map((r: any) => r.reservation_id)
+  const allowedIds: string[] = codeData.invite_code_reservations.map((r: { reservation_id: string }) => r.reservation_id)
   const invalidIds = (reservationIds as string[]).filter(id => !allowedIds.includes(id))
   if (invalidIds.length > 0) {
     throw createError({ statusCode: 400, statusMessage: 'Ungültige Reservierungs-ID' })
@@ -42,7 +49,7 @@ export default defineEventHandler(async (event) => {
       .eq('reservation_id', reservationId)
       .eq('status', 'confirmed')
 
-    const totalBooked = (bookedData ?? []).reduce((sum: number, b: any) => sum + b.seat_count, 0)
+    const totalBooked = (bookedData ?? []).reduce((sum: number, b: { seat_count: number }) => sum + b.seat_count, 0)
 
     const { data: reservation } = await supabase
       .from('reservations')

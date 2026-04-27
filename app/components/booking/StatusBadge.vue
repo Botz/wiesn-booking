@@ -11,7 +11,10 @@ const config = computed(() => ({
 </script>
 
 <template>
-  <UBadge :color="config.color" variant="soft">
+  <UBadge
+    :color="config.color"
+    variant="soft"
+  >
     {{ config.label }}
   </UBadge>
 </template>

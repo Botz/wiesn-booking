@@ -1,6 +1,18 @@
+interface AdminInviteCode {
+  id: string
+  code: string
+  label: string | null
+  is_active: boolean | null
+  max_guests_per_booking: number
+  invite_code_reservations: Array<{
+    reservation_id: string
+    reservations?: { name: string, date: string } | null
+  }>
+}
+
 export const useAdminInviteCodes = () => {
   const supabase = useSupabaseClient()
-  const inviteCodes = ref<any[]>([])
+  const inviteCodes = ref<AdminInviteCode[]>([])
   const loading = ref(false)
 
   async function fetchAll() {
@@ -62,7 +74,8 @@ export const useAdminInviteCodes = () => {
       .single()
     if (data) {
       const idx = inviteCodes.value.findIndex(c => c.id === id)
-      if (idx !== -1) inviteCodes.value[idx].is_active = !current
+      const code = inviteCodes.value[idx]
+      if (idx !== -1 && code) code.is_active = !current
     }
     return { data, error }
   }

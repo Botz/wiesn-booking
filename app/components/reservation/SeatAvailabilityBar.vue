@@ -17,10 +17,17 @@ const color = computed<'success' | 'warning' | 'error'>(() => {
   <div>
     <div class="flex justify-between text-sm mb-1">
       <span class="text-muted">{{ confirmed }} / {{ total }} belegt</span>
-      <span :class="available === 0 ? 'text-error-500' : 'text-success-500'" class="font-medium">
+      <span
+        :class="available === 0 ? 'text-error-500' : 'text-success-500'"
+        class="font-medium"
+      >
         {{ available }} frei
       </span>
     </div>
-    <UProgress :value="confirmed" :max="total" :color="color" />
+    <UProgress
+      :value="confirmed"
+      :max="total"
+      :color="color"
+    />
   </div>
 </template>

@@ -6,7 +6,9 @@ export default defineNuxtConfig({
     '@nuxt/hints',
     '@nuxt/test-utils',
     'nuxt-icons',
-    '@nuxtjs/supabase'
+    '@nuxtjs/supabase',
+    '@vercel/analytics/nuxt',
+    '@vercel/speed-insights/nuxt'
   ],
 
   devtools: {
@@ -15,17 +17,12 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
-  supabase: {
-    redirectOptions: {
-      login: '/admin/login',
-      callback: '/admin',
-      exclude: ['/', '/join/*', '/cancel/*']
-    }
+  routeRules: {
+    '/': { prerender: false }
   },
 
-  routeRules: {
-    '/': { prerender: false },
-    '/admin/**': { ssr: false }
+  devServer: {
+    https: true
   },
 
   compatibilityDate: '2025-01-15',
@@ -36,6 +33,14 @@ export default defineNuxtConfig({
         commaDangle: 'never',
         braceStyle: '1tbs'
       }
+    }
+  },
+
+  supabase: {
+    redirectOptions: {
+      login: '/admin/login',
+      callback: '/admin',
+      exclude: ['/', '/join/*', '/cancel/*']
     }
   }
 })

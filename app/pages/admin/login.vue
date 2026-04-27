@@ -14,8 +14,7 @@ async function onSubmit() {
   const { error: signInError } = await signIn(form.email, form.password)
   if (signInError) {
     error.value = signInError.message
-  }
-  else {
+  } else {
     await navigateTo('/admin')
   }
   loading.value = false
@@ -28,9 +27,15 @@ async function onSubmit() {
       <UCard class="w-full max-w-sm">
         <template #header>
           <div class="text-center py-2">
-            <div class="text-4xl mb-2">🍺</div>
-            <h1 class="text-xl font-bold">Wiesn Admin</h1>
-            <p class="text-sm text-muted">Anmelden um fortzufahren</p>
+            <div class="text-4xl mb-2">
+              🍺
+            </div>
+            <h1 class="text-xl font-bold">
+              Wiesn Admin
+            </h1>
+            <p class="text-sm text-muted">
+              Anmelden um fortzufahren
+            </p>
           </div>
         </template>
 
@@ -55,7 +60,11 @@ async function onSubmit() {
               @keyup.enter="onSubmit"
             />
           </div>
-          <UAlert v-if="error" color="error" :description="error" />
+          <UAlert
+            v-if="error"
+            color="error"
+            :description="error"
+          />
           <UButton
             class="w-full"
             size="lg"

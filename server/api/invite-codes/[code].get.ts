@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 404, statusMessage: 'Ungültiger oder inaktiver Einladungscode' })
   }
 
-  const reservationIds: string[] = inviteCode.invite_code_reservations.map((r: any) => r.reservation_id)
+  const reservationIds: string[] = inviteCode.invite_code_reservations.map((r: { reservation_id: string }) => r.reservation_id)
 
   if (reservationIds.length === 0) {
     return {

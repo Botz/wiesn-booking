@@ -10,7 +10,7 @@ const searchQuery = ref('')
 onMounted(() => fetchAll())
 
 const filteredBookings = computed(() => {
-  return bookings.value.filter(b => {
+  return bookings.value.filter((b) => {
     if (filterStatus.value !== 'all' && b.status !== filterStatus.value) return false
     if (filterPayment.value !== 'all' && b.payment_status !== filterPayment.value) return false
     if (searchQuery.value) {
@@ -36,8 +36,12 @@ async function handleCancel(id: string, name: string) {
 <template>
   <div>
     <div class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-bold">Alle Buchungen</h1>
-      <p class="text-muted text-sm">{{ filteredBookings.length }} Einträge</p>
+      <h1 class="text-2xl font-bold">
+        Alle Buchungen
+      </h1>
+      <p class="text-muted text-sm">
+        {{ filteredBookings.length }} Einträge
+      </p>
     </div>
 
     <!-- Filters -->
@@ -76,15 +80,27 @@ async function handleCancel(id: string, name: string) {
       </div>
     </div>
 
-    <div v-if="loading" class="flex justify-center py-12">
-      <UIcon name="i-lucide-loader-circle" class="w-8 h-8 animate-spin text-muted" />
+    <div
+      v-if="loading"
+      class="flex justify-center py-12"
+    >
+      <UIcon
+        name="i-lucide-loader-circle"
+        class="w-8 h-8 animate-spin text-muted"
+      />
     </div>
 
-    <div v-else-if="filteredBookings.length === 0" class="text-center py-12 text-muted">
+    <div
+      v-else-if="filteredBookings.length === 0"
+      class="text-center py-12 text-muted"
+    >
       Keine Buchungen gefunden.
     </div>
 
-    <div v-else class="space-y-2">
+    <div
+      v-else
+      class="space-y-2"
+    >
       <div
         v-for="b in filteredBookings"
         :key="b.id"

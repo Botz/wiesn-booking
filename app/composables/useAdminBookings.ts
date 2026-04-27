@@ -1,6 +1,20 @@
+interface AdminBooking {
+  id: string
+  reservation_id: string
+  guest_name: string
+  guest_contact: string | null
+  plus_one_name: string | null
+  seat_count: number
+  status: 'confirmed' | 'waitlisted' | 'cancelled'
+  payment_status: 'pending' | 'paid'
+  created_at: string | null
+  reservations?: { name: string, date: string } | null
+  invite_codes?: { code: string } | null
+}
+
 export const useAdminBookings = (reservationId?: string) => {
   const supabase = useSupabaseClient()
-  const bookings = ref<any[]>([])
+  const bookings = ref<AdminBooking[]>([])
   const loading = ref(false)
 
   async function fetchAll() {
@@ -15,7 +29,7 @@ export const useAdminBookings = (reservationId?: string) => {
     }
 
     const { data, error } = await query
-    if (data) bookings.value = data
+    if (data) bookings.value = data as AdminBooking[]
     loading.value = false
     return { data, error }
   }
@@ -30,7 +44,8 @@ export const useAdminBookings = (reservationId?: string) => {
       .single()
     if (data) {
       const idx = bookings.value.findIndex(b => b.id === id)
-      if (idx !== -1) bookings.value[idx].payment_status = newStatus
+      const booking = bookings.value[idx]
+      if (idx !== -1 && booking) booking.payment_status = newStatus
     }
     return { data, error }
   }
@@ -44,7 +59,8 @@ export const useAdminBookings = (reservationId?: string) => {
       .single()
     if (data) {
       const idx = bookings.value.findIndex(b => b.id === id)
-      if (idx !== -1) bookings.value[idx].status = 'cancelled'
+      const booking = bookings.value[idx]
+      if (idx !== -1 && booking) booking.status = 'cancelled'
     }
     return { data, error }
   }
