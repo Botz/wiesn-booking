@@ -5,6 +5,7 @@ interface BookingPayload {
   guestContact?: string
   plusOneName?: string
   seatCount: number
+  website?: string
 }
 
 interface BookingResult {

@@ -11,7 +11,8 @@ const { book, loading: bookingLoading, error: bookingError, results } = useBooki
 const form = reactive({
   guestName: '',
   guestContact: '',
-  plusOneName: ''
+  plusOneName: '',
+  website: ''
 })
 
 const bookingComplete = ref(false)
@@ -54,7 +55,8 @@ async function submit() {
     guestName: form.guestName.trim(),
     guestContact: form.guestContact.trim() || undefined,
     plusOneName: allowPlusOne.value && form.plusOneName.trim() ? form.plusOneName.trim() : undefined,
-    seatCount: seatCount.value
+    seatCount: seatCount.value,
+    website: form.website
   })
 
   if (result) {
@@ -260,6 +262,21 @@ function getReservationName(reservationId: string) {
         <h2 class="font-semibold text-sm uppercase tracking-wide text-muted">
           Deine Daten
         </h2>
+
+        <div
+          aria-hidden="true"
+          class="absolute -left-[9999px] w-px h-px overflow-hidden"
+        >
+          <label>
+            Website (bitte leer lassen)
+            <input
+              v-model="form.website"
+              type="text"
+              tabindex="-1"
+              autocomplete="off"
+            >
+          </label>
+        </div>
 
         <div>
           <label class="block text-sm font-medium mb-1.5">

@@ -6,8 +6,14 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 403, statusMessage: 'Buchungen sind noch nicht möglich' })
   }
 
+  rateLimit(event, { key: 'bookings', limit: 5, windowMs: 60_000 })
+
   const body = await readBody(event)
-  const { inviteCode, reservationIds, guestName, guestContact, plusOneName, seatCount } = body
+  const { inviteCode, reservationIds, guestName, guestContact, plusOneName, seatCount, website } = body
+
+  if (typeof website === 'string' && website.length > 0) {
+    throw createError({ statusCode: 400, statusMessage: 'Pflichtfelder fehlen' })
+  }
 
   if (!inviteCode || !Array.isArray(reservationIds) || !reservationIds.length || !guestName || !seatCount) {
     throw createError({ statusCode: 400, statusMessage: 'Pflichtfelder fehlen' })
