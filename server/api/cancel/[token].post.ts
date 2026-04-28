@@ -1,4 +1,6 @@
 export default defineEventHandler(async (event) => {
+  rateLimit(event, { key: 'cancel', limit: 10, windowMs: 60_000 })
+
   const token = getRouterParam(event, 'token')
 
   if (!token) {

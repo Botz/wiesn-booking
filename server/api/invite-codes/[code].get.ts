@@ -1,4 +1,6 @@
 export default defineEventHandler(async (event) => {
+  rateLimit(event, { key: 'invite-codes', limit: 10, windowMs: 60_000 })
+
   const code = getRouterParam(event, 'code')
 
   if (!code) {
