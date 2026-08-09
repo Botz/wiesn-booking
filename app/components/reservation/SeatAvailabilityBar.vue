@@ -25,7 +25,7 @@ const color = computed<'success' | 'warning' | 'error'>(() => {
       </span>
     </div>
     <UProgress
-      :value="confirmed"
+      :model-value="confirmed"
       :max="total"
       :color="color"
     />
